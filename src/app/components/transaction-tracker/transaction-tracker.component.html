@@ -1,0 +1,107 @@
+<div class="container">
+    <div>
+        <button type="button" class="btnn" (click)="setTransactionType('expense')">Expense</button>
+        <button type="button" class="btnn" (click)="setTransactionType('income')">Income</button>
+        <button type="button" class="btnn" (click)="setTransactionType('transfer')">Transfer</button>
+    </div>
+
+    <form *ngIf="transaction.type" (ngSubmit)="needToEdit ? saveEdit() : addTransaction()">
+
+        <div *ngIf="transaction.type === 'expense'">
+            <input type="datetime-local" [(ngModel)]="transaction.dateTime" [ngModelOptions]="{standalone: true}">
+            <select [(ngModel)]="transaction.category" [ngModelOptions]="{standalone: true}">
+                <option value="food">Food</option>
+                <option value="transport">Transport</option>
+                <option value="education">Education</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="others">Others</option>
+            </select>
+            <input type="number" [(ngModel)]="transaction.amount" placeholder="Amount"
+                [ngModelOptions]="{standalone: true}">
+            <input type="text" [(ngModel)]="transaction.description" placeholder="Description"
+                [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div *ngIf="transaction.type === 'income'">
+            <input type="text" [(ngModel)]="transaction.from" placeholder="From" [ngModelOptions]="{standalone: true}"
+                required>
+            <input type="number" [(ngModel)]="transaction.amount" placeholder="Amount"
+                [ngModelOptions]="{standalone: true}">
+            <input type="text" [(ngModel)]="transaction.description" placeholder="Description"
+                [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div *ngIf="transaction.type === 'transfer'">
+            <input type="text" [(ngModel)]="transaction.from" placeholder="From" [ngModelOptions]="{standalone: true}">
+            <input type="text" [(ngModel)]="transaction.to" placeholder="To" [ngModelOptions]="{standalone: true}">
+            <input type="number" [(ngModel)]="transaction.amount" placeholder="Amount"
+                [ngModelOptions]="{standalone: true}">
+            <input type="text" [(ngModel)]="transaction.description" placeholder="Description"
+                [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <button class="submitButton" type="submit">{{ needToEdit ? 'Save Edit' : 'Add Transaction' }}</button>
+        <button class="submitButton" *ngIf="needToEdit" (click)="clearForm()">Cancel</button>
+
+    </form>
+</div>
+
+<div class="transactions">
+    <div>
+        <ul>
+            <li *ngFor="let transaction of transactions; let i = index" [ngClass]="{
+                    'expense': transaction.type === 'expense',
+                    'income': transaction.type === 'income',
+                   
+                }">
+                <div class="transaction-details">
+                    <p>
+                        <span *ngIf="transaction.type === 'expense'">Category: {{ transaction.category }}</span>
+                        <span *ngIf="transaction.type === 'income'">From: {{ transaction.from }}</span>
+                        <span *ngIf="transaction.type === 'transfer'">From: {{ transaction.from }}, To: {{
+                            transaction.to }}</span>
+                        <span>Amount: {{ transaction.amount }}</span>
+                        <span>Description: {{ transaction.description }}</span>
+                    </p>
+                </div>
+                <div class="transaction-actions">
+                    <button (click)="editTransaction(i)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button (click)="deleteTransaction(i,this.transaction.type)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="transferTransactions">
+    <div>
+        <h4> Transfer </h4>
+        <ul>
+            <li *ngFor="let transaction of transferTransactions; let i = index">
+                <div class="transaction-details">
+                    <p>
+                        <span>From: {{ transaction.from }}, To: {{transaction.to }}</span>
+                        <span>Amount: {{ transaction.amount }}</span>
+                        <span>Description: {{ transaction.description }}</span>
+                    </p>
+                </div>
+                <div class="transaction-actions">
+                    <button (click)="editTransaction(i)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button (click)="deleteTransaction(i,this.transaction.type)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div>
+    <app-expense-chart [transactionData]="trasactionDataToJson()"></app-expense-chart>
+</div>
