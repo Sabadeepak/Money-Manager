@@ -32,7 +32,8 @@
         </div>
 
         <div *ngIf="transaction.type === 'transfer'">
-            <input type="text" [(ngModel)]="transaction.from" placeholder="From" [ngModelOptions]="{standalone: true}">
+            <input type="text" [(ngModel)]="transaction.from" placeholder="From" [ngModelOptions]="{standalone: true}"
+                ngModel="required">
             <input type="text" [(ngModel)]="transaction.to" placeholder="To" [ngModelOptions]="{standalone: true}">
             <input type="number" [(ngModel)]="transaction.amount" placeholder="Amount"
                 [ngModelOptions]="{standalone: true}">
@@ -50,8 +51,8 @@
     <div>
         <ul>
             <li *ngFor="let transaction of transactions; let i = index" [ngClass]="{
-                    'expense': transaction.type === 'expense',
-                    'income': transaction.type === 'income',
+                    'expensee': transaction.type === 'expense',
+                    'incomee': transaction.type === 'income',
                    
                 }">
                 <div class="transaction-details">

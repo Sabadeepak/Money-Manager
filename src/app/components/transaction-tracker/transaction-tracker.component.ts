@@ -103,7 +103,7 @@ export class TransactionTrackerComponent {
       localStorage.setItem('transferTransactions', JSON.stringify(this.transferTransactions));
     }
   }
-  alllTransactions() {
+  alllTransactions(): Transaction[][] {
     const allTransactions: { [year: string]: { [month: string]: { [day: string]: Transaction[] } } } = {};
 
     this.transactions.forEach(transaction => {
@@ -124,7 +124,18 @@ export class TransactionTrackerComponent {
       }
       allTransactions[year][month][day].push(transaction);
     });
-    console.log(allTransactions)
+
+    const result: Transaction[][] = [];
+    for (const year in allTransactions) {
+      for (const month in allTransactions[year]) {
+        for (const day in allTransactions[year][month]) {
+          result.push(allTransactions[year][month][day]);
+        }
+        console.log(allTransactions);
+      }
+    }
+
+    return result;
   }
 
 }

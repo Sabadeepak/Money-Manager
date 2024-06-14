@@ -81,6 +81,7 @@ input[type=submit]:hover {
     border-radius: 10px;
     align-items: center;
     padding: 3px;
+    font-size: 13px;
 }
 
 .transaction-details {
@@ -107,11 +108,11 @@ input[type=submit]:hover {
     margin-right: 5px;
 }
 
-.expense {
+.transactions ul li .expensee {
     background-color: #ff7b7b;
 }
 
-.income {
+.transactions ul li .incomee {
     background-color: #48b448;
 }
 
