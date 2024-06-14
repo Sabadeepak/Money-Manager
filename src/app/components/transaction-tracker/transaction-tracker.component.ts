@@ -125,7 +125,6 @@ export class TransactionTrackerComponent {
       allTransactions[year][month][day].push(transaction);
     });
     console.log(allTransactions)
-
   }
 
 }
