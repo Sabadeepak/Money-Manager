@@ -1,6 +1,6 @@
 .container {
-    width: 250px;
-    height: 100vh !important;
+    width: 20%;
+    height: 100% !important;
     background: #000;
     position: absolute;
     border-radius: 0px;
@@ -10,7 +10,7 @@
 
 .btnn {
     height: 40px;
-    width: 200px;
+    width: 100%;
     background-color: #625ba7;
     border: none;
     margin-top: 10px;
@@ -18,7 +18,7 @@
     border-radius: 10px;
     cursor: pointer;
     color: #fff;
-    transition: 0.4s ease;
+    transition: 0.6 ease;
 }
 
 .btnn:hover {
@@ -64,23 +64,23 @@ input[type=submit]:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 350px;
-    height: 100vh !important;
-    background: #4036a0;
+    width: 27%;
+    height: 100%;
+    background: #615EFC;
     right: 0;
     position: absolute;
     border-radius: 5px;
-    padding: 25px;
+    padding: 20px;
     overflow-y: auto;
 }
 
 .transactions ul li {
     display: flex;
     justify-content: flex-start;
-    background-color: #716e8d;
+    background-color: #D1D8C5;
     border-radius: 10px;
     align-items: center;
-    padding: 10px;
+    padding: 3px;
 }
 
 .transaction-details {
@@ -97,13 +97,14 @@ input[type=submit]:hover {
 }
 
 .transaction-actions button {
-    background-color: #d2dad2;
-    color: white;
+    background-color: #716e8d;
+    color: #D1D8C5;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     padding: 8px;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .expense {
@@ -114,14 +115,15 @@ input[type=submit]:hover {
     background-color: #48b448;
 }
 
-.transferTransactions  {
-    width: 300px;
-    height: 300px;
-    background-color: #4036a0;
-    left: 660px;
-    top: 20px;
+.transferTransactions {
+    width: 22%;
+    height: 47%;
+    background-color: #615EFC;
+    left: 48%;
+    top: 2%;
     position: absolute;
     border-radius: 5px;
+    padding: 5px;
     overflow-y: auto;
 }
 
@@ -140,16 +142,20 @@ input[type=submit]:hover {
 }
 
 .transferTransactions ul li {
+    display: flex;
+    justify-content: flex-start;
     background-color: #d2dad2;
+    align-items: center;
     border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 2px;
+    margin-bottom: 3px;
+    font-size: 10px;
 }
 
 .transferTransactions ul li span {
     color: #000;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
 .transferTransactions ul li .transaction-actions button {
@@ -158,10 +164,6 @@ input[type=submit]:hover {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    padding: 8px;
-    margin-left: 10px;
-}
-
-.transferTransactions ul li:last-child {
-    margin-bottom: 0;
+    padding: 5px;
+    margin-left: 5px;
 }
