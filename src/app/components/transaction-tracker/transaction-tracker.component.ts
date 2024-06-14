@@ -29,6 +29,7 @@ export class TransactionTrackerComponent {
     if (savedTransferTransactions) {
       this.transferTransactions = JSON.parse(savedTransferTransactions);
     }
+    this.alllTransactions();
   }
 
   setTransactionType(type: 'expense' | 'income' | 'transfer') {
@@ -101,6 +102,39 @@ export class TransactionTrackerComponent {
     } else if (type === 'transferTransactions') {
       localStorage.setItem('transferTransactions', JSON.stringify(this.transferTransactions));
     }
+  }
+  alllTransactions(): Transaction[][] {
+    const allTransactions: { [year: string]: { [month: string]: { [day: string]: Transaction[] } } } = {};
+
+    this.transactions.forEach(transaction => {
+      const date = new Date(transaction.dateTime);
+      const year = date.getFullYear().toString();
+      const month = (date.getMonth() + 1).toString();
+      const day = date.getDate().toString();
+
+      if (!allTransactions[year]) {
+        allTransactions[year] = {};
+      }
+      if (!allTransactions[year][month]) {
+        allTransactions[year][month] = {};
+      }
+      if (!allTransactions[year][month][day]) {
+        allTransactions[year][month][day] = [];
+      }
+      allTransactions[year][month][day].push(transaction);
+    });
+
+    const result: Transaction[][] = [];
+    for (const year in allTransactions) {
+      for (const month in allTransactions[year]) {
+        for (const day in allTransactions[year][month]) {
+          result.push(allTransactions[year][month][day]);
+        }
+        console.log(allTransactions);
+      }
+    }
+
+    return result;
   }
 
 }
