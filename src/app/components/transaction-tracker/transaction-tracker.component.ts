@@ -104,4 +104,24 @@ export class TransactionTrackerComponent {
       localStorage.setItem('transferTransactions', JSON.stringify(this.transferTransactions));
     }
   }
+
+ allTransaction (transactions: Transaction[]): {[key: string]: Transaction[]} {
+    const allTransaction: {[key: string]: Transaction[]} = {};
+
+    transactions.forEach(transaction => {
+        const date = new Date(transaction.dateTime);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+
+        const dateKey = `${year}-${month}-${day}`;
+        if (!allTransaction[dateKey]) {
+            allTransaction[dateKey] = [];
+        }
+        allTransaction[dateKey].push(transaction);
+    });
+
+    return allTransaction;
+}
+
 }
