@@ -77,7 +77,6 @@ input[type=submit]:hover {
 .transactions ul li {
     display: flex;
     justify-content: flex-start;
-    background-color: #D1D8C5;
     border-radius: 10px;
     align-items: center;
     padding: 3px;
@@ -108,12 +107,12 @@ input[type=submit]:hover {
     margin-right: 5px;
 }
 
-.transactions ul li .expensee {
-    background-color: #ff7b7b;
+.expensee {
+    background-color: #d88484;
 }
 
-.transactions ul li .incomee {
-    background-color: #48b448;
+.incomee {
+    background-color: #c8e9e3;
 }
 
 .transferTransactions {

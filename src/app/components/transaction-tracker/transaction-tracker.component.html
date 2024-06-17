@@ -5,47 +5,47 @@
         <button type="button" class="btnn" (click)="setTransactionType('transfer')">Transfer</button>
     </div>
 
-    <form *ngIf="transaction.type" (ngSubmit)="needToEdit ? saveEdit() : addTransaction()">
+    <form *ngIf="transaction.type" (ngSubmit)="needToEdit ? saveEdit() : addTransaction()" #transactionForm="ngForm">
 
         <div *ngIf="transaction.type === 'expense'">
-            <input type="datetime-local" [(ngModel)]="transaction.dateTime" [ngModelOptions]="{standalone: true}">
-            <select [(ngModel)]="transaction.category" [ngModelOptions]="{standalone: true}">
+            <input type="datetime-local" name="dateTime" [(ngModel)]="transaction.dateTime" required>
+            <select name="category" [(ngModel)]="transaction.category" required>
                 <option value="food">Food</option>
                 <option value="transport">Transport</option>
                 <option value="education">Education</option>
                 <option value="entertainment">Entertainment</option>
                 <option value="others">Others</option>
             </select>
-            <input type="number" [(ngModel)]="transaction.amount" placeholder="Amount"
-                [ngModelOptions]="{standalone: true}">
-            <input type="text" [(ngModel)]="transaction.description" placeholder="Description"
-                [ngModelOptions]="{standalone: true}">
+            <input type="number" name="amount" [(ngModel)]="transaction.amount" placeholder="Amount" required>
+            <input type="text" name="description" [(ngModel)]="transaction.description" placeholder="Description"
+                required>
         </div>
 
         <div *ngIf="transaction.type === 'income'">
-            <input type="text" [(ngModel)]="transaction.from" placeholder="From" [ngModelOptions]="{standalone: true}"
+
+            <input type="datetime-local" name="dateTime" [(ngModel)]="transaction.dateTime" required>
+            <input type="text" name="from" [(ngModel)]="transaction.from" placeholder="From" required>
+            <input type="number" name="amount" [(ngModel)]="transaction.amount" placeholder="Amount" required>
+            <input type="text" name="description" [(ngModel)]="transaction.description" placeholder="Description"
                 required>
-            <input type="number" [(ngModel)]="transaction.amount" placeholder="Amount"
-                [ngModelOptions]="{standalone: true}">
-            <input type="text" [(ngModel)]="transaction.description" placeholder="Description"
-                [ngModelOptions]="{standalone: true}">
         </div>
 
         <div *ngIf="transaction.type === 'transfer'">
-            <input type="text" [(ngModel)]="transaction.from" placeholder="From" [ngModelOptions]="{standalone: true}"
-                ngModel="required">
-            <input type="text" [(ngModel)]="transaction.to" placeholder="To" [ngModelOptions]="{standalone: true}">
-            <input type="number" [(ngModel)]="transaction.amount" placeholder="Amount"
-                [ngModelOptions]="{standalone: true}">
-            <input type="text" [(ngModel)]="transaction.description" placeholder="Description"
-                [ngModelOptions]="{standalone: true}">
+
+            <input type="datetime-local" name="dateTime" [(ngModel)]="transaction.dateTime" required>
+            <input type="text" name="from" [(ngModel)]="transaction.from" placeholder="From" required>
+            <input type="text" name="to" [(ngModel)]="transaction.to" placeholder="To" required>
+            <input type="number" name="amount" [(ngModel)]="transaction.amount" placeholder="Amount" required>
+            <input type="text" name="description" [(ngModel)]="transaction.description" placeholder="Description"
+                required>
         </div>
 
         <button class="submitButton" type="submit">{{ needToEdit ? 'Save Edit' : 'Add Transaction' }}</button>
-        <button class="submitButton" *ngIf="needToEdit" (click)="clearForm()">Cancel</button>
+        <button class="submitButton" *ngIf="needToEdit" type="button" (click)="clearForm()">Cancel</button>
 
     </form>
 </div>
+
 
 <div class="transactions">
     <div>
@@ -67,7 +67,7 @@
                     <button (click)="editTransaction(i)">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button (click)="deleteTransaction(i,transaction.type)">
+                    <button (click)="deleteTransaction(i,this.transaction.type)">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>

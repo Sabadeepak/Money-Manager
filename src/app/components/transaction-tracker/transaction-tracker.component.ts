@@ -3,6 +3,8 @@ import { Transaction } from '../../model/transaction';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ExpenseChartComponent } from '../expense-chart/expense-chart.component';
+import { dateTimestampProvider } from 'rxjs/internal/scheduler/dateTimestampProvider';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-tracker',
@@ -15,7 +17,7 @@ export class TransactionTrackerComponent {
 
   transferTransactions: Transaction[] = [];
   transactions: Transaction[] = [];
-  transaction: Transaction = { type: 'expense', description: '', dateTime: new Date(), amount: 0, category: 'food' };
+  transaction: Transaction = { type: 'expense', description: '', dateTime: new Date(), amount: 0 };
   needToEdit: boolean = false;
   editedIndex: number = -1;
 
@@ -43,11 +45,15 @@ export class TransactionTrackerComponent {
     if (this.transaction.type === 'transfer') {
       transaction = {
         ...this.transaction,
-        type: this.transaction.type
+        type: this.transaction.type,
+        dateTime:this.transaction.dateTime,
+        from:this.transaction.from,
+        to:this.transaction.to
       };
       this.transferTransactions.unshift(transaction);
       this.updateLocalStorage('transferTransactions');
-    } else {
+    } 
+    else {
       transaction = {
         ...this.transaction,
         type: this.transaction.type
@@ -85,8 +91,8 @@ export class TransactionTrackerComponent {
       type: this.transaction.type,
       description: '',
       dateTime: new Date(),
-      amount: this.transaction.amount,
-      category: this.transaction.category
+      amount:0,
+      
     };
     this.needToEdit = false;
     this.editedIndex = -1;
@@ -134,8 +140,9 @@ export class TransactionTrackerComponent {
         console.log(allTransactions);
       }
     }
-
+   
     return result;
+   
   }
 
 }
