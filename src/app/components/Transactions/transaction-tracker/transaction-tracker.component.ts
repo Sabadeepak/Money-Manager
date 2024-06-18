@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Transaction } from '../../model/transaction';
+import { Transaction } from '../../../model/transaction';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ExpenseChartComponent } from '../expense-chart/expense-chart.component';
@@ -20,6 +20,8 @@ export class TransactionTrackerComponent {
   transaction: Transaction = { type: 'expense', description: '', dateTime: new Date(), amount: 0 };
   needToEdit: boolean = false;
   editedIndex: number = -1;
+
+   allTransactions: Transaction [][] = [] ;
 
   constructor() {
     const savedTransactions = localStorage.getItem('transactions');
@@ -110,7 +112,7 @@ export class TransactionTrackerComponent {
     }
   }
   alllTransactions(): Transaction[][] {
-    const allTransactions: { [year: string]: { [month: string]: { [day: string]: Transaction[] } } } = {};
+   let allTransactions: { [year: string]: { [month: string]: { [day: string]: Transaction[] } } } = {};
 
     this.transactions.forEach(transaction => {
       const date = new Date(transaction.dateTime);
@@ -129,9 +131,10 @@ export class TransactionTrackerComponent {
         allTransactions[year][month][day] = [];
       }
       allTransactions[year][month][day].push(transaction);
+   
     });
 
-    const result: Transaction[][] = [];
+    let result: Transaction[][] = [];
     for (const year in allTransactions) {
       for (const month in allTransactions[year]) {
         for (const day in allTransactions[year][month]) {
@@ -140,7 +143,8 @@ export class TransactionTrackerComponent {
         console.log(allTransactions);
       }
     }
-   
+ 
+    result = this.allTransactions
     return result;
    
   }

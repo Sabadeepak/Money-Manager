@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TransactionTrackerComponent } from './components/transaction-tracker/transaction-tracker.component';
+import { TransactionTrackerComponent } from './components/Transactions/transaction-tracker/transaction-tracker.component';
 
 @Component({
   selector: 'app-root',
