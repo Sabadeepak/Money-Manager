@@ -1,12 +1,21 @@
-<div class="content">
-    <div class="form">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <h2>Login Here</h2>
-            <input formControlName="username" type="text" placeholder="Enter Your Name Here">
-            <input formControlName="email" type="email" placeholder="Enter Email Here">
-            <input formControlName="password" type="password" placeholder="Enter Password Here">
-            <button type="submit" class="btnn">Login</button>
-            <p class="link">Don't have an account? <button (click)="navigateToSignUp()">Sign Up</button></p>
-        </form>
-    </div>
+<div class="container">
+  <h2>{{ login ? 'Login' : 'Signup' }}</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>Email:</label>
+    <input type="email" formControlName="email" required>
+
+    <label>Password:</label>
+    <input type="password" formControlName="password" required>
+
+    <button type="submit" [disabled]="loginForm.invalid">
+      {{ login ? 'Login' : 'Signup' }}
+    </button>
+  </form>
+
+  <p>
+    <button (click)="changeMode()">
+      {{ login ? 'Dont have an account? Sign up here.' : 'Already have an account? Login here.' }}
+    </button>
+  </p>
 </div>

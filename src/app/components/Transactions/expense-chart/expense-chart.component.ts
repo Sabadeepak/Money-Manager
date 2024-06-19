@@ -4,6 +4,7 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-expense-chart',
   standalone: true,

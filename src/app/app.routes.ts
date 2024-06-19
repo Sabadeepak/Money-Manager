@@ -5,7 +5,8 @@ import { LoginComponent } from './components/Login-Page/login/login.component';
 
 export const routes: Routes = [
 
-    { path : "transactionTracker", component:TransactionTrackerComponent },
-    { path : "loginPage" , component:LoginComponent }
+    { path: '', redirectTo: '/loginPage', pathMatch: 'full' },
+    { path: "loginPage", component: LoginComponent },
+    { path: "transactionTracker", component: TransactionTrackerComponent },
 
 ];

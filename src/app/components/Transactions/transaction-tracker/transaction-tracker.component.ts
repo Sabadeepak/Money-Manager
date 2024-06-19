@@ -3,8 +3,8 @@ import { Transaction } from '../../../model/transaction';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ExpenseChartComponent } from '../expense-chart/expense-chart.component';
-import { dateTimestampProvider } from 'rxjs/internal/scheduler/dateTimestampProvider';
-import { from } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-transaction-tracker',
@@ -15,13 +15,14 @@ import { from } from 'rxjs';
 })
 export class TransactionTrackerComponent {
 
+
   transferTransactions: Transaction[] = [];
   transactions: Transaction[] = [];
   transaction: Transaction = { type: 'expense', description: '', dateTime: new Date(), amount: 0 };
   needToEdit: boolean = false;
   editedIndex: number = -1;
 
-   allTransactions: Transaction [][] = [] ;
+  allTransactions: Transaction[][] = [];
 
   constructor() {
     const savedTransactions = localStorage.getItem('transactions');
@@ -48,13 +49,13 @@ export class TransactionTrackerComponent {
       transaction = {
         ...this.transaction,
         type: this.transaction.type,
-        dateTime:this.transaction.dateTime,
-        from:this.transaction.from,
-        to:this.transaction.to
+        dateTime: this.transaction.dateTime,
+        from: this.transaction.from,
+        to: this.transaction.to
       };
       this.transferTransactions.unshift(transaction);
       this.updateLocalStorage('transferTransactions');
-    } 
+    }
     else {
       transaction = {
         ...this.transaction,
@@ -93,8 +94,8 @@ export class TransactionTrackerComponent {
       type: this.transaction.type,
       description: '',
       dateTime: new Date(),
-      amount:0,
-      
+      amount: 0,
+
     };
     this.needToEdit = false;
     this.editedIndex = -1;
@@ -112,7 +113,7 @@ export class TransactionTrackerComponent {
     }
   }
   alllTransactions(): Transaction[][] {
-   let allTransactions: { [year: string]: { [month: string]: { [day: string]: Transaction[] } } } = {};
+    let allTransactions: { [year: string]: { [month: string]: { [day: string]: Transaction[] } } } = {};
 
     this.transactions.forEach(transaction => {
       const date = new Date(transaction.dateTime);
@@ -131,7 +132,7 @@ export class TransactionTrackerComponent {
         allTransactions[year][month][day] = [];
       }
       allTransactions[year][month][day].push(transaction);
-   
+
     });
 
     let result: Transaction[][] = [];
@@ -143,10 +144,10 @@ export class TransactionTrackerComponent {
         console.log(allTransactions);
       }
     }
- 
+
     result = this.allTransactions
     return result;
-   
+
   }
 
 }
