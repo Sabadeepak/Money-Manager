@@ -1,12 +1,12 @@
 <div class="content">
     <div class="form">
-        <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <h2>Login Here</h2>
             <input formControlName="username" type="text" placeholder="Enter Your Name Here">
             <input formControlName="email" type="email" placeholder="Enter Email Here">
             <input formControlName="password" type="password" placeholder="Enter Password Here">
             <button type="submit" class="btnn">Login</button>
-            <!-- <p class="link">Don't have an account? <button (click)="navigateToSignUp()">Sign Up</button></p>
-        </form> -->
+            <p class="link">Don't have an account? <button (click)="navigateToSignUp()">Sign Up</button></p>
+        </form>
     </div>
 </div>
